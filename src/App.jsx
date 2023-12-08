@@ -14,7 +14,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/create-group" element={<Transactions />} />
+        <Route path="/create-transaction" element={<Transactions />} />
+        <Route path="/create-group" element={<CreateGroup />} />
         <Route path="/my-groups" element={<MyGroups />} />
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/register" element={<Register />} />
