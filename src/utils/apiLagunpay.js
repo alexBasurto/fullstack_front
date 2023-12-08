@@ -4,10 +4,10 @@ const loginApi = async (email, password) => {
     try {
       const response = await fetch(`${VITE_BACKEND_HOST}/login`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'omit',
         body: JSON.stringify({ email, password }),
       });
   
