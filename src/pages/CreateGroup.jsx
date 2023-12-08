@@ -3,11 +3,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
 function CreateGroup() {
   return (
-    <div>
+    <>
+      <Header />
+    <main>
+      <h2>Crear grupo</h2>
       <Link to={"/my-groups"} >Volver a mis grupos</Link>
-      <h1>Crear grupo</h1>
       <form>
         <label>
           Nombre del grupo:
@@ -23,7 +28,9 @@ function CreateGroup() {
         </label>
         <input type="submit" value="Crear Grupo" />
       </form>
-    </div>
+    </main>
+    <Footer />
+    </>
   );
 }
 

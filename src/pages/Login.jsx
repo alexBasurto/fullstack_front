@@ -1,7 +1,10 @@
 //Login.jsx
 import React from 'react';
 import { useState } from 'react';
-import loginApi from '../utils/apiLagunpay';
+import {loginApi} from '../utils/apiLagunpay';
+
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Login() {
     const [email, setEmail] = React.useState('');
@@ -27,29 +30,36 @@ function Login() {
     }
 
     return (
-        <div>
-        <h1>Login</h1>
-        {error && <p className='error'>{error}</p>}
-        {isLogged && <p className='success'>Usuario logueado correctamente</p>}
-        <form action="post" onSubmit={handleSumbit} onReset={() => {
-            setEmail('');
-            setPassword('');
-            }
-        }>
-            <label>
-            Email de usuario:
-            <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </label>
+        <>
+        <Header />
+        <main>
+            <h2>Login</h2>
 
-            <label>
-            Contraseña:
-            <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </label>
+            {error && <p className='error'>{error}</p>}
+            {isLogged && !error && <p className='success'>Usuario logueado correctamente</p>}
+            <form action="post" onSubmit={handleSumbit} onReset={() => {
+                setEmail('');
+                setPassword('');
+                }
+            }>
+                <label>
+                Email de usuario:
+                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </label>
 
-            <button type="submit">Iniciar sesión</button>
-            <button type="reset" value="Limpiar">Limpiar</button>
-        </form>
-        </div>
+                <label>
+                Contraseña:
+                <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </label>
+
+                <button type="submit">Iniciar sesión</button>
+                <button type="reset" value="Limpiar">Limpiar</button>
+            </form>
+        </main>
+        <Footer />
+        </>
+
+
     );
     }
 

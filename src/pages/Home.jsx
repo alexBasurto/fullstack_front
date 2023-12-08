@@ -1,12 +1,18 @@
 //Home.jsx
 
-import React from 'react';
+import {useState} from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Home() {
   return (
-    <div>
-      <h1>Hogar</h1>
-    </div>
+<>
+<Header />
+<main>
+  <h2>Hogar</h2>
+</main>
+<Footer/>
+</>
   );
 }
 

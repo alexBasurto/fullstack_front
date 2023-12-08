@@ -2,13 +2,19 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function UserDetails() {
   return (
-    <div>
+    <>
+    <Header />
+    <main>
       <Link to={"/my-groups"} >Volver a mis grupos</Link>
-      <h1>Mi perfil</h1>
-    </div>
+      <h2>Mi perfil</h2>
+    </main>
+    <Footer />
+    </>
   );
 }
 
