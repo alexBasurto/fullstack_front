@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import MyGroups from './pages/MyGroups';
 import UserDetails from './pages/UserDetails';
+import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateGroup from './pages/CreateGroup';
 import Transactions from './components/Transactions';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/create-group" element={<CreateGroup />} />
         <Route path="/my-groups" element={<MyGroups />} />
         <Route path="/user-details" element={<UserDetails />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
       </Routes>
