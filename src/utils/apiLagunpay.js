@@ -47,4 +47,28 @@ const registerApi = async (username, email, mobile, password, passwordVerify) =>
     }
 };
 
-export {loginApi, registerApi};
+//Obtener tus grupos
+
+const getMyGroups = async (id) => {
+    try{
+      const response = await fetch(`${VITE_BACKEND_HOST}/my-groups`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id}),
+      });
+      if (response.ok) {
+        return response;
+      } else {
+        throw new Error('Error al obtener grupos');
+      }
+      } catch (error) {
+        console.error("Error en la peticion de grupos", error.message);
+        throw error;
+      }
+    }
+
+
+export {loginApi, registerApi, getMyGroups};
