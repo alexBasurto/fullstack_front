@@ -2,14 +2,15 @@
 import React from 'react';
 import { useState } from 'react';
 import {loginApi} from '../utils/apiLagunpay';
+import { useAuth } from '../context/AuthContext';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Login() {
+    const { user, setUser } = useAuth();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [isLogged, setIsLogged] = useState(false);
     const [error, setError] = useState(null);
 
     const handleSumbit = (e) => {
@@ -22,7 +23,7 @@ function Login() {
         loginApi(email, password)
         .then(response => {
             console.log(response);
-            setIsLogged(true);
+            setUser(email);
         }).catch(error => {
             console.log(error);
             setError('Error al iniciar sesión');
@@ -36,7 +37,7 @@ function Login() {
             <h2>Login</h2>
 
             {error && <p className='error'>{error}</p>}
-            {isLogged && !error && <p className='success'>Usuario logueado correctamente</p>}
+            {user && !error && <p className='success'>Usuario logueado correctamente</p>}
             <form action="post" onSubmit={handleSumbit} onReset={() => {
                 setEmail('');
                 setPassword('');

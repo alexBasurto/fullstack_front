@@ -47,6 +47,28 @@ const registerApi = async (username, email, mobile, password, passwordVerify) =>
     }
 };
 
+const logoutApi = async () => {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/logout`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error(
+                `ERROR en la solicitud: ${response.status} - ${response.statusText}`
+            );
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error.message);
+        throw error;
+    }
+}
+
 //Obtener tus grupos
 
 const getMyGroups = async (id) => {
@@ -71,4 +93,4 @@ const getMyGroups = async (id) => {
     }
 
 
-export {loginApi, registerApi, getMyGroups};
+export {loginApi, registerApi, logoutApi, getMyGroups};
