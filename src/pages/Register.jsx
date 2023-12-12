@@ -1,6 +1,7 @@
 //Register.jsx
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { registerApi } from '../utils/apiLagunpay';
@@ -41,6 +42,7 @@ const handleSubmit = (e) => {
     <Header />
     <main>
       <h2>Registro</h2>
+      <Link to="/login">¿Ya tienes cuenta? Inicia sesión.</Link>
       {error && <p className='error'>{error}</p>}
       {isRegistered && !error && <p className='success'>Usuario registrado correctamente</p>}
       <form action="post" onSubmit={handleSubmit} onReset={() => {
