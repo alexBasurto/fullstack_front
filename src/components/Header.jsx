@@ -11,7 +11,6 @@ function Header() {
     const handleLogout = () => {
         logoutApi()
         .then(response => {
-            console.log(response);
             setUser(null);
             navigate('/');
         }).catch(error => {

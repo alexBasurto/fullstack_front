@@ -83,7 +83,7 @@ const logoutApi = async () => {
 
 //Obtener tus grupos
 
-const getMyGroups = async (id) => {
+const getMyGroups = async () => {
     try {
         const response = await fetch(`${VITE_BACKEND_HOST}/groups/my-groups`, {
             method: "GET",
@@ -120,19 +120,22 @@ const getGroupDetails = async (id) => {
     }
 }
 
-const getUserDetails = async (id) => {
+const getUserDetails = async (id = null) => {
     try {
-        const response = await fetch(`${VITE_BACKEND_HOST}/users/${id}`, {
+        let apiUrl;
+        if (id) {
+            apiUrl = `${VITE_BACKEND_HOST}/users/${id}`;
+        } else {
+            apiUrl = `${VITE_BACKEND_HOST}/users/me`;
+        }
+        const response = await fetch(apiUrl, {
             method: "GET",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
         });
         if (response.ok) {
             return response;
         } else {
-            throw new Error("Error al obtener grupos");
+            throw new Error("Error al obtener datos de usuario");
         }
     } catch (error) {
         console.error("Error en la peticion de grupos", error.message);
