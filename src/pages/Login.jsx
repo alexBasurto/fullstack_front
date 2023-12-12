@@ -23,7 +23,6 @@ function Login() {
         setError(null);
         loginApi(email, password)
         .then(response => {
-            console.log(response);
             setUser(email);
         }).catch(error => {
             console.log(error);
