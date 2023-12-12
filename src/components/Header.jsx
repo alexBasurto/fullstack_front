@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { logoutApi } from '../utils/apiLagunpay';
 
 function Header() {
     const { user, setUser } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         logoutApi()
         .then(response => {
             console.log(response);
             setUser(null);
+            navigate('/');
         }).catch(error => {
             console.log(error);
         });
