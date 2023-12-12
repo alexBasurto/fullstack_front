@@ -1,16 +1,32 @@
 //Group.jsx
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import groups from '../../datos/groups';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { getGroupDetails } from '../utils/apiLagunpay';
 
 
 function Group() {
   const { id } = useParams();
-  const group = groups.find(group => group._id.$oid === id);
+  const [group, setGroup] = useState([]);
+
+  const handleGetGroup = async () => {
+    try {
+      const response = await getGroupDetails(id);
+      const data = await response.json();
+      setGroup(data);
+    } catch (error) {
+      console.error("Error en la peticion de grupos", error.message);
+    }
+  }
+
+  useEffect(() => {
+    handleGetGroup();
+  }
+  , []);
+
 
   return (
     <>
@@ -18,10 +34,17 @@ function Group() {
       <main>
         {!group && <p>Grupo no encontrado</p>}
         {group && (<>
-        <h2>{groups.name}</h2>
+        <h2>{group.name}</h2>
         <Link to={"/my-groups"} >Volver a mis grupos</Link>
-        <p>{groups.description}</p>
-        <p>{groups.users}</p>
+        <p>{group.description}</p>
+        <h3>Usuarios</h3>
+        {group && group.users && (
+  <ul>
+    {group.users.map((user, index) => (
+      <li key={index}>{user}</li>
+    ))}
+  </ul>
+)}
         </>
         )}
       </main>

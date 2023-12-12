@@ -27,7 +27,7 @@ const getMyGroups = async (id) => {
 
 function GroupCard({ group }) {
   return (
-    <Link to={`/group/${group._id.$oid}`} className="group-card">
+    <Link to={`/group/${group._id}`} className="group-card">
       <h2>{group.name}</h2>
       <p>{group.description}</p>
     </Link>

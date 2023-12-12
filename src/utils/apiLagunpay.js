@@ -100,6 +100,26 @@ const getMyGroups = async (id) => {
     }
 };
 
+
+//Obtener informacion del grupo
+
+const getGroupDetails = async (id) => {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/groups/${id}`, {
+            method: "GET",
+            credentials: "include",
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error("Error al obtener información del grupo");
+        }
+    } catch (error) {
+        console.error("Error en la peticion de grupo", error.message);
+        throw error;
+    }
+}
+
 const getUserDetails = async (id) => {
     try {
         const response = await fetch(`${VITE_BACKEND_HOST}/users/${id}`, {
@@ -120,4 +140,4 @@ const getUserDetails = async (id) => {
     }
 };
 
-export { loginApi, registerApi, logoutApi, getMyGroups, getUserDetails };
+export { loginApi, registerApi, logoutApi, getMyGroups, getUserDetails, getGroupDetails };

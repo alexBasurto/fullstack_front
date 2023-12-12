@@ -20,6 +20,7 @@ const handleGetMyGroups = async () => {
     const response = await getMyGroups();
     const data = await response.json();
     setGroups(data);
+    console.log("Grupos", data)
   } catch (error) {
     console.error("Error en la peticion de grupos", error.message);
   }
