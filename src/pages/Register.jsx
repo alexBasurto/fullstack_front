@@ -29,6 +29,7 @@ const handleSubmit = (e) => {
   registerApi(username, email, mobile, password, passwordVerify).then(response => {
     console.log(response);
     setIsRegistered(true);
+    
   }
   ).catch(error => {
     console.log(error);
@@ -42,9 +43,10 @@ const handleSubmit = (e) => {
     <Header />
     <main>
       <h2>Registro</h2>
+      {!isRegistered && <>
+      <p>Introduce tus datos para registrarte</p>
       <Link to="/login">¿Ya tienes cuenta? Inicia sesión.</Link>
       {error && <p className='error'>{error}</p>}
-      {isRegistered && !error && <p className='success'>Usuario registrado correctamente</p>}
       <form action="post" onSubmit={handleSubmit} onReset={() => {
         setUsername('');
         setEmail('');
@@ -75,6 +77,12 @@ const handleSubmit = (e) => {
         <button type="submit">Registrarse</button>
         <button type="reset" value="Limpiar">Limpiar</button>
       </form>
+      </>
+      }
+      {isRegistered && !error && <>
+      <p className='success'>Usuario registrado correctamente</p>
+      <Link to="/login">Inicie sesión.</Link>
+      </>}
     </main>
     <Footer />
     </>

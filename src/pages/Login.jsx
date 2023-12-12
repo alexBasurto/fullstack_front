@@ -36,10 +36,13 @@ function Login() {
         <Header />
         <main>
             <h2>Login</h2>
+            {user && !error && <p className='success'>Usuario logueado correctamente</p>}
+            {!user &&
+            <>
+            <p>Introduce tus datos para iniciar sesión</p>
             <Link to="/register">¿No tienes cuenta? Regístrate.</Link>
 
             {error && <p className='error'>{error}</p>}
-            {user && !error && <p className='success'>Usuario logueado correctamente</p>}
             <form action="post" onSubmit={handleSumbit} onReset={() => {
                 setEmail('');
                 setPassword('');
@@ -58,6 +61,8 @@ function Login() {
                 <button type="submit">Iniciar sesión</button>
                 <button type="reset" value="Limpiar">Limpiar</button>
             </form>
+            </>
+            }
         </main>
         <Footer />
         </>
