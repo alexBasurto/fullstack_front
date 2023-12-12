@@ -7,6 +7,7 @@ import groups from '../../datos/groups';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+
 function Group() {
   const { id } = useParams();
   const group = groups.find(group => group._id.$oid === id);
