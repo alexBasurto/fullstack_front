@@ -85,13 +85,9 @@ const logoutApi = async () => {
 
 const getMyGroups = async (id) => {
     try {
-        const response = await fetch(`${VITE_BACKEND_HOST}/my-groups`, {
+        const response = await fetch(`${VITE_BACKEND_HOST}/groups/my-groups`, {
             method: "GET",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ id }),
         });
         if (response.ok) {
             return response;
