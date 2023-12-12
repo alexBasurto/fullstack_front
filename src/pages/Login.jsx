@@ -1,5 +1,6 @@
 //Login.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {loginApi} from '../utils/apiLagunpay';
 import { useAuth } from '../context/AuthContext';
@@ -35,6 +36,7 @@ function Login() {
         <Header />
         <main>
             <h2>Login</h2>
+            <Link to="/register">¿No tienes cuenta? Regístrate.</Link>
 
             {error && <p className='error'>{error}</p>}
             {user && !error && <p className='success'>Usuario logueado correctamente</p>}
