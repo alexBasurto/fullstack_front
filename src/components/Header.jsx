@@ -22,14 +22,15 @@ function Header() {
             <nav>
                 <ul>
                     <li><Link to="/">Hogar</Link></li>
+                    {user ? 
+                    <>
                     <li><Link to="/user-details">User Details</Link></li>
                     <li><Link to="/my-groups">My Groups</Link></li>
-                    <li><Link to="/create-group">Create Group</Link></li>
-                    <li><Link to="/create-transaction">Create Transaction</Link></li>
+                    </>
+                    : null}
                     <li>
-                    {user ? <button onClick={handleLogout}>Logout</button> : <Link to="/login">Login</Link>}
+                    {user ? <a onClick={handleLogout}>Logout</a> : <Link to="/login">Login</Link>}
                     </li>
-                    <li><Link to="/register">Register</Link></li>
                 </ul>
             </nav>
             {user && <p>Usuario logueado: {user}</p>}

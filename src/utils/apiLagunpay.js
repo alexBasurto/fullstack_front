@@ -24,7 +24,13 @@ const loginApi = async (email, password) => {
     }
 };
 
-const registerApi = async (username, email, mobile, password, passwordVerify) => {
+const registerApi = async (
+    username,
+    email,
+    mobile,
+    password,
+    passwordVerify
+) => {
     try {
         const response = await fetch(`${VITE_BACKEND_HOST}/register`, {
             method: "POST",
@@ -32,7 +38,13 @@ const registerApi = async (username, email, mobile, password, passwordVerify) =>
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ username, email, mobile, password, passwordVerify }),
+            body: JSON.stringify({
+                username,
+                email,
+                mobile,
+                password,
+                passwordVerify,
+            }),
         });
         if (response.ok) {
             return response;
@@ -67,30 +79,49 @@ const logoutApi = async () => {
         console.error("Error en la solicitud:", error.message);
         throw error;
     }
-}
+};
 
 //Obtener tus grupos
 
 const getMyGroups = async (id) => {
-    try{
-      const response = await fetch(`${VITE_BACKEND_HOST}/my-groups`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({id}),
-      });
-      if (response.ok) {
-        return response;
-      } else {
-        throw new Error('Error al obtener grupos');
-      }
-      } catch (error) {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/my-groups`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id }),
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error("Error al obtener grupos");
+        }
+    } catch (error) {
         console.error("Error en la peticion de grupos", error.message);
         throw error;
-      }
     }
+};
 
+const getUserDetails = async (id) => {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/users/${id}`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error("Error al obtener grupos");
+        }
+    } catch (error) {
+        console.error("Error en la peticion de grupos", error.message);
+        throw error;
+    }
+};
 
-export {loginApi, registerApi, logoutApi, getMyGroups};
+export { loginApi, registerApi, logoutApi, getMyGroups, getUserDetails };
