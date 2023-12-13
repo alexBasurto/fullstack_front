@@ -25,17 +25,41 @@ const GroupBalance = ({ group }) => {
     }
   });
 
-  return (
-    <div>
-      <h2>Balance del grupo {group.name}</h2>
-      {group.users.map(user => (
-        <div key={user}>
-          <h3>{user}</h3>
-          <p>{balances[user] > 0 ? `Debe cobrar ${balances[user]}` : `Debe pagar ${-balances[user]}`}</p>
-        </div>
-      ))}
-    </div>
-  );
+// Separa los usuarios que deben pagar de los que deben cobrar
+const payers = Object.entries(balances).filter(([user, balance]) => balance < 0).map(([user, balance]) => ({ user, balance: -balance }));
+const receivers = Object.entries(balances).filter(([user, balance]) => balance > 0).map(([user, balance]) => ({ user, balance }));
+
+// Resuelve las deudas
+const debts = [];
+payers.forEach(payer => {
+  while (payer.balance > 0) {
+    const receiver = receivers.find(receiver => receiver.balance > 0);
+    if (!receiver) {
+      break; // No hay más receptores, por lo que salimos del bucle
+    }
+    const amount = Math.min(payer.balance, receiver.balance);
+    debts.push({ from: payer.user, to: receiver.user, amount });
+    payer.balance -= amount;
+    receiver.balance -= amount;
+  }
+});
+
+// Añade este código después de tu código existente
+return (
+  <div>
+    <h2>Balance del grupo {group.name}</h2>
+    {group.users.map(user => (
+      <div key={user}>
+        <h3>{user}</h3>
+        <p>{balances[user] > 0 ? `Debe pagar ${balances[user]}` : `Debe cobrar ${-balances[user]}`}</p>
+      </div>
+    ))}
+    <h2>Liquidación de cuentas</h2>
+    {debts.map((debt, index) => (
+      <p key={index}>{debt.to} debe a {debt.from} {debt.amount}</p>
+    ))}
+  </div>
+);
 };
 
 export default GroupBalance;
