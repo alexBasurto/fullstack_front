@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getGroupDetails } from '../utils/apiLagunpay';
+import GroupBalance from '../components/GroupBalance';
 
 
 function Group() {
@@ -39,13 +40,16 @@ function Group() {
         <p>{group.description}</p>
         <h3>Usuarios</h3>
         {group && group.users && (
-  <ul>
-    {group.users.map((user, index) => (
-      <li key={index}>{user}</li>
-    ))}
-  </ul>
-)}
+        <ul>
+          {group.users.map((user, index) => (
+            <li key={index}>{user}</li>
+          ))}
+        </ul>
+      )}
         </>
+        )}
+        {group && group.transactions && (
+          <GroupBalance group={group} />
         )}
       </main>
       <Footer />
