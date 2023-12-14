@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import { getUserDetails, updateUserDetails } from '../utils/apiLagunpay.js';
 
-function UserDetailsEdit({ editMode = true, setEditMode }) {
+function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }) {
     const [userDetails, setUserDetails] = useState('');
     const [error, setError] = useState('');
 
@@ -28,6 +28,7 @@ function UserDetailsEdit({ editMode = true, setEditMode }) {
             if (!response.ok) {
                 throw new Error('No se ha podido actualizar el usuario.');
             } else {
+                setSave(true);
                 setEditMode(false);
             }
         } catch (error) {
@@ -53,8 +54,8 @@ function UserDetailsEdit({ editMode = true, setEditMode }) {
                         <input type="tel" id="mobile" name="mobile" defaultValue={userDetails.mobile} />
                         <label htmlFor="role">Rol</label>
                         <select id="role" name="role" defaultValue={userDetails.role}>
-                            <option value="user">user</option>
-                            <option value="admin">admin</option>
+                            <option value="user">Usuario</option>
+                            <option value="admin">Administrador</option>
                         </select>
                         <label htmlFor="active">Activo</label>
                         <select id="active" name="active" defaultValue={userDetails.active}>
