@@ -3,6 +3,7 @@ import { getUserDetails, updateUserDetails } from '../utils/apiLagunpay.js';
 
 function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }) {
     const [userDetails, setUserDetails] = useState('');
+    const [emailFormat, setEmailFormat] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -25,7 +26,6 @@ function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }
         const form = document.getElementById('editUser');
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
-        console.log(data);
         try {
             if (data.password !== data.passwordVerify) {
                 form.password.value = '';
@@ -61,7 +61,8 @@ function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }
                         <label htmlFor="username">Nombre</label>
                         <input type="text" id="username" name="username" defaultValue={userDetails.username} />
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" name="email" defaultValue={userDetails.email} />
+                        <input type="email" id="email" name="email" required defaultValue={userDetails.email} />
+                        {!emailFormat && <p>Formato de email incorrecto.</p>}
                         <label htmlFor="mobile">Número de teléfono</label>
                         <input type="tel" id="mobile" name="mobile" defaultValue={userDetails.mobile} />
                         <label htmlFor="password">Nueva contraseña</label>
