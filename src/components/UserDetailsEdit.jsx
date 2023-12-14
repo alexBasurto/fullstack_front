@@ -3,7 +3,8 @@ import { getUserDetails, updateUserDetails } from '../utils/apiLagunpay.js';
 
 function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }) {
     const [userDetails, setUserDetails] = useState('');
-    const [emailFormat, setEmailFormat] = useState(true);
+    const [email, setEmail] = useState('');
+    const [isValidEmail, setIsValidEmail] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -16,9 +17,20 @@ function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }
                 console.error('Error en la peticion de usuario', error.message);
             }
         };
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+        // Verificar si la dirección de correo electrónico es válida
+        const isValid = emailRegex.test(email);
+        
+        // Actualizar el estado de la validez de la dirección de correo electrónico
+        setIsValidEmail(isValid);
         fetchData();
-    }, []);
+
+    }, [email]);
+
+    const handleChange = (e) => {
+        setEmail(e.target.value);
+      };
 
     const handleSubmit = async (event) => {
         setSave(false);
@@ -61,8 +73,8 @@ function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }
                         <label htmlFor="username">Nombre</label>
                         <input type="text" id="username" name="username" defaultValue={userDetails.username} />
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" name="email" required defaultValue={userDetails.email} />
-                        {!emailFormat && <p>Formato de email incorrecto.</p>}
+                        <input type="email" id="email" name="email" required defaultValue={userDetails.email} onChange={handleChange}/>
+                        {!isValidEmail && <p>Formato de email incorrecto.</p>}
                         <label htmlFor="mobile">Número de teléfono</label>
                         <input type="tel" id="mobile" name="mobile" defaultValue={userDetails.mobile} />
                         <label htmlFor="password">Nueva contraseña</label>
