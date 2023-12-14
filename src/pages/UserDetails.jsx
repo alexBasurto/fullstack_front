@@ -15,7 +15,6 @@ function UserDetails() {
             <h2>User Details</h2>
             {!editMode && <UserDetailsShow editMode={editMode} setEditMode={setEditMode} />}
             {editMode && <UserDetailsEdit editMode={editMode} setEditMode={setEditMode} />}
-            <Link to="/">Volver al inicio</Link>
         </main>
         <Footer />
         </>

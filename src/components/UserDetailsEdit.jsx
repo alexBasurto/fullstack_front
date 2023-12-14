@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react';
-import { getUserDetails } from '../utils/apiLagunpay';
+import { getUserDetails, updateUserDetails } from '../utils/apiLagunpay.js';
 
 function UserDetailsEdit({ editMode = true, setEditMode }) {
     const [userDetails, setUserDetails] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,14 +19,32 @@ function UserDetailsEdit({ editMode = true, setEditMode }) {
         fetchData();
     }, []);
 
+    const handleSubmit = async (event) => {
+        const form = document.getElementById('editUser');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        try {
+            const response = await updateUserDetails(data);
+            if (!response.ok) {
+                throw new Error('No se ha podido actualizar el usuario.');
+            } else {
+                setEditMode(false);
+            }
+        } catch (error) {
+            console.error('Error en la peticion de usuario.', error.message);
+            setError(error.message);
+        }
+    };
+
     return (
         <>
             {userDetails && (
                 <>
-                   <button type="button" onClick={() => {
+                    {error && <p>{error}</p>}
+                    <button type="button" onClick={() => {
                         setEditMode(false)
-                    }}>Guardar</button>
-                    <form>
+                    }}>Descartar cambios</button>
+                    <form id='editUser'>
                         <label htmlFor="username">Nombre</label>
                         <input type="text" id="username" name="username" defaultValue={userDetails.username} />
                         <label htmlFor="email">Email</label>
@@ -42,11 +61,16 @@ function UserDetailsEdit({ editMode = true, setEditMode }) {
                             <option value="true">Sí</option>
                             <option value="false">No</option>
                         </select>
+                        <button type="submit" form='editUser' onClick={(event) => {
+                            event.preventDefault();
+                            handleSubmit(event);
+                        }}>Guardar cambios</button>
                     </form> 
                 </>
             )}
         </>
     );
 }
+
 
 export default UserDetailsEdit;

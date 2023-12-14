@@ -145,7 +145,7 @@ const getUserDetails = async (id = null) => {
 
 const updateUserDetails = async (data) => {
     try {
-        const response = await fetch(`${VITE_BACKEND_HOST}/users/me`, {
+        const response = await fetch(`${VITE_BACKEND_HOST}/users/me/edit`, {
             method: "PUT",
             credentials: "include",
             headers: {
