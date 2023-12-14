@@ -24,6 +24,12 @@ function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         try {
+            if (data.password !== data.passwordVerify) {
+                //vaciar contraseñas
+                form.password.value = '';
+                form.passwordVerify.value = '';
+                throw new Error('Las contraseñas no coinciden.');
+            }
             const response = await updateUserDetails(data);
             if (!response.ok) {
                 throw new Error('No se ha podido actualizar el usuario.');
@@ -52,6 +58,10 @@ function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }
                         <input type="email" id="email" name="email" defaultValue={userDetails.email} />
                         <label htmlFor="mobile">Número de teléfono</label>
                         <input type="tel" id="mobile" name="mobile" defaultValue={userDetails.mobile} />
+                        <label htmlFor="password">Nueva contraseña</label>
+                        <input type="password" id="password" name="password" />
+                        <label htmlFor="passwordVerify">Repita la contraseña</label>
+                        <input type="password" id="passwordVerify" name="passwordVerify" />
                         <label htmlFor="role">Rol</label>
                         <select id="role" name="role" defaultValue={userDetails.role}>
                             <option value="user">Usuario</option>
