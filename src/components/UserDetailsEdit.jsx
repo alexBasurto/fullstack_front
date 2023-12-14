@@ -20,15 +20,21 @@ function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }
     }, []);
 
     const handleSubmit = async (event) => {
+        setSave(false);
+        setError('');
         const form = document.getElementById('editUser');
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
+        console.log(data);
         try {
             if (data.password !== data.passwordVerify) {
-                //vaciar contraseñas
                 form.password.value = '';
                 form.passwordVerify.value = '';
                 throw new Error('Las contraseñas no coinciden.');
+            }
+            if (data.password === '') {
+                delete data.password;
+                delete data.passwordVerify;
             }
             const response = await updateUserDetails(data);
             if (!response.ok) {

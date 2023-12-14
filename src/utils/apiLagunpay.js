@@ -159,7 +159,7 @@ const updateUserDetails = async (data) => {
             throw new Error("Error al actualizar datos de usuario");
         }
     } catch (error) {
-        console.error("Error en la peticion de grupos", error.message);
+        console.error("Error al actualizar usuario", error.message);
         throw error;
     }
 }

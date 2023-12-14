@@ -15,7 +15,7 @@ function UserDetails() {
         <main>
             <h2>User Details</h2>
             {save && <p>Usuario actualizado correctamente.</p>}
-            {!editMode && <UserDetailsShow editMode={editMode} setEditMode={setEditMode} />}
+            {!editMode && <UserDetailsShow editMode={editMode} setEditMode={setEditMode} save={save} setSave={setSave} />}
             {editMode && <UserDetailsEdit editMode={editMode} setEditMode={setEditMode} save={save} setSave={setSave} />}
         </main>
         <Footer />

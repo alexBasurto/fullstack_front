@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {getUserDetails} from '../utils/apiLagunpay.js';
 
-function UserDetailsShow({ editMode = false, setEditMode }) {
+function UserDetailsShow({ editMode = false, setEditMode, save = false, setSave  }) {
     const [userDetails, setUserDetails] = useState('');
 
     useEffect(() => {
@@ -23,6 +23,7 @@ function UserDetailsShow({ editMode = false, setEditMode }) {
             {userDetails && (
                 <>
                     <button type="button" onClick={() => {
+                        setSave(false);
                         setEditMode(true);
                     }
                     }>Editar</button>
