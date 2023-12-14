@@ -143,4 +143,25 @@ const getUserDetails = async (id = null) => {
     }
 };
 
-export { loginApi, registerApi, logoutApi, getMyGroups, getUserDetails, getGroupDetails };
+const updateUserDetails = async (data) => {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/users/me`, {
+            method: "PUT",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error("Error al actualizar datos de usuario");
+        }
+    } catch (error) {
+        console.error("Error en la peticion de grupos", error.message);
+        throw error;
+    }
+}
+
+export { loginApi, registerApi, logoutApi, getMyGroups, getUserDetails, getGroupDetails, updateUserDetails };
