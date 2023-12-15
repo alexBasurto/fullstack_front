@@ -81,6 +81,25 @@ const logoutApi = async () => {
     }
 };
 
+//Eliminar grupo (pasar active: false)
+
+const deleteGroup = async (id) => {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/groups/${id}/delete`, {
+            method: "PUT",
+            credentials: "include"
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error("Error al actualizar datos de usuario");
+        }
+    } catch (error) {
+        console.error("Error al actualizar usuario", error.message);
+        throw error;
+    }
+}
+
 //Obtener tus grupos
 
 const getMyGroups = async () => {
@@ -164,4 +183,12 @@ const updateUserDetails = async (data) => {
     }
 }
 
-export { loginApi, registerApi, logoutApi, getMyGroups, getUserDetails, getGroupDetails, updateUserDetails };
+export { loginApi, 
+    registerApi, 
+    logoutApi, 
+    getMyGroups, 
+    getUserDetails, 
+    getGroupDetails, 
+    updateUserDetails,
+    deleteGroup
+  };
