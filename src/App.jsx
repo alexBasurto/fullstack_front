@@ -11,6 +11,8 @@ import CreateGroup from './pages/CreateGroup';
 import Transactions from './components/Transactions';
 import Group from './pages/Group';
 import { AuthProvider } from './context/AuthContext';
+import GroupEdit from './components/GroupEdit';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/create-transaction" element={<Transactions />} />
           <Route path="/group/:id" element={<Group />} />
+          <Route path="/group/:id/edit" element={<GroupEdit />} />
           <Route path="/create-group" element={<CreateGroup />} />
           <Route path="/my-groups" element={<MyGroups />} />
           <Route path="/user-details" element={<UserDetails />} />

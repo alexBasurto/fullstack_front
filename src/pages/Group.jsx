@@ -37,6 +37,8 @@ function Group() {
         {group && (<>
         <h2>{group.name}</h2>
         <Link to={"/my-groups"} >Volver a mis grupos</Link>
+        <br/>
+        <Link to={`/group/${id}/edit`} >Editar grupo</Link>
         <p>{group.description}</p>
         <h3>Usuarios</h3>
         {group && group.users && (
