@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSession } from '../context/SessionContext';
 import { logoutApi } from '../utils/apiLagunpay';
+import obtenerIniciales from '../utils/obtenerIniciales';
 
 function Header() {
     const { session, setSession } = useSession();
@@ -34,7 +35,7 @@ function Header() {
                     </li>
                 </ul>
             </nav>
-            {session && <p>Usuario logueado: {session.username}</p>}
+            {session && <div className='userInitials'>{obtenerIniciales(session.username)}</div>}
         </header>
     )
 }

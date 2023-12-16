@@ -43,8 +43,16 @@
 
 /*  Código nuestro */
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
 nav ul {
   display: flex;
+  width: auto;
   justify-content: space-between;
   align-items: center;
   list-style: none;
@@ -58,4 +66,17 @@ nav ul li a {
   font-size: 1.2em;
   padding: 1em;
   cursor: pointer;
+}
+
+.userInitials {
+  background-color: orangered;
+  color: white;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: bold;
 }
