@@ -1,17 +1,16 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useSession } from '../context/SessionContext';
 import { logoutApi } from '../utils/apiLagunpay';
 
 function Header() {
-    const { user, setUser } = useAuth();
+    const { session, setSession } = useSession();
     const navigate = useNavigate();
 
     const handleLogout = () => {
         logoutApi()
         .then(response => {
-            setUser(null);
+            setSession(null);
             navigate('/');
         }).catch(error => {
             console.log(error);
@@ -24,18 +23,18 @@ function Header() {
             <nav>
                 <ul>
                     <li><Link to="/">Hogar</Link></li>
-                    {user ? 
+                    {session ? 
                     <>
                     <li><Link to="/user-details">User Details</Link></li>
                     <li><Link to="/my-groups">My Groups</Link></li>
                     </>
                     : null}
                     <li>
-                    {user ? <a onClick={handleLogout}>Logout</a> : <Link to="/login">Login</Link>}
+                    {session ? <a onClick={handleLogout}>Logout</a> : <Link to="/login">Login</Link>}
                     </li>
                 </ul>
             </nav>
-            {user && <p>Usuario logueado: {user}</p>}
+            {session && <p>Usuario logueado: {session.username}</p>}
         </header>
     )
 }

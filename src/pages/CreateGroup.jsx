@@ -1,8 +1,5 @@
-//CreateGroup.jsx
-
-import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
-import { AuthProvider, useAuth } from '../context/AuthContext';
+import { useState } from 'react';
+import { useSession } from '../context/SessionContext';
 
 
 import Header from '../components/Header';
@@ -11,7 +8,7 @@ const VITE_BACKEND_HOST =
     import.meta.env.VITE_BACKEND_HOST || "http://localhost:3006";
 
 function CreateGroup() {
-  const { user, setUser } = useAuth();
+  const { session, setSession } = useSession();
   const navigate = useNavigate();
   const [group, setGroup] = useState({
     name: '',
@@ -20,7 +17,7 @@ function CreateGroup() {
     createdAt: new Date(),
     updatedAt: new Date(),
     active: true,
-    owner: user ? user : '',
+    owner: session ? session : '',
     transactions: [],
   });
 

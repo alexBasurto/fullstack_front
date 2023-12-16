@@ -1,17 +1,16 @@
 //Login.jsx
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {loginApi} from '../utils/apiLagunpay';
-import { useAuth } from '../context/AuthContext';
+import { useSession } from '../context/SessionContext';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Login() {
-    const { user, setUser } = useAuth();
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const { session, setSession } = useSession();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
     const handleSumbit = (e) => {
@@ -23,7 +22,7 @@ function Login() {
         setError(null);
         loginApi(email, password)
         .then(response => {
-            setUser(email);
+            setSession(email);
         }).catch(error => {
             console.log(error);
             setError('Error al iniciar sesión');
@@ -35,8 +34,8 @@ function Login() {
         <Header />
         <main>
             <h2>Login</h2>
-            {user && !error && <p className='success'>Usuario logueado correctamente</p>}
-            {!user &&
+            {session && !error && <p className='success'>Usuario logueado correctamente</p>}
+            {!session &&
             <>
             <p>Introduce tus datos para iniciar sesión</p>
             <Link to="/register">¿No tienes cuenta? Regístrate.</Link>
