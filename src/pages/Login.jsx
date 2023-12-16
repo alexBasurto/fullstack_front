@@ -1,7 +1,7 @@
 //Login.jsx
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import {loginApi} from '../utils/apiLagunpay';
+import {loginApi, sessionApi} from '../utils/apiLagunpay';
 import { useSession } from '../context/SessionContext';
 
 import Header from '../components/Header';
@@ -22,7 +22,7 @@ function Login() {
         setError(null);
         loginApi(email, password)
         .then(response => {
-            setSession(email);
+            setSession(response.data);
         }).catch(error => {
             console.log(error);
             setError('Error al iniciar sesión');

@@ -12,7 +12,8 @@ const loginApi = async (email, password) => {
             body: JSON.stringify({ email, password }),
         });
         if (response.ok) {
-            return response;
+            const data = await response.json();
+            return { response, data };
         } else {
             throw new Error(
                 `ERROR en la solicitud: ${response.status} - ${response.statusText}`
@@ -80,6 +81,26 @@ const logoutApi = async () => {
         throw error;
     }
 };
+
+const sessionApi = async () => {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/session`, {
+            method: "GET",
+            credentials: "include",
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error(
+                `ERROR en la solicitud: ${response.status} - ${response.statusText}`
+            );
+        }
+    }
+    catch (error) {
+        console.error("Error en la solicitud:", error.message);
+        throw error;
+    }
+}
 
 //Eliminar grupo (pasar active: false)
 
@@ -185,7 +206,8 @@ const updateUserDetails = async (data) => {
 
 export { loginApi, 
     registerApi, 
-    logoutApi, 
+    logoutApi,
+    sessionApi,
     getMyGroups, 
     getUserDetails, 
     getGroupDetails, 

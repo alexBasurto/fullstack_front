@@ -8,7 +8,7 @@ import Register from './pages/Register';
 import CreateGroup from './pages/CreateGroup';
 import Transactions from './components/Transactions';
 import Group from './pages/Group';
-import { SessionProvider, useSession } from './context/SessionContext';
+import { SessionProvider } from './context/SessionContext';
 import GroupEdit from './components/GroupEdit';
 
 
