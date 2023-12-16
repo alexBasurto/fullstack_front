@@ -26,16 +26,17 @@ function Header() {
                     <li><Link to="/">Hogar</Link></li>
                     {session ? 
                     <>
-                    <li><Link to="/user-details">User Details</Link></li>
                     <li><Link to="/my-groups">My Groups</Link></li>
                     </>
                     : null}
                     <li>
                     {session ? <a onClick={handleLogout}>Logout</a> : <Link to="/login">Login</Link>}
                     </li>
+                    <li><Link to="/user-details">
+                        {session && <div className='userInitials'>{obtenerIniciales(session.username)}</div>}    
+                    </Link></li>
                 </ul>
             </nav>
-            {session && <div className='userInitials'>{obtenerIniciales(session.username)}</div>}
         </header>
     )
 }
