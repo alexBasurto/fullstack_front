@@ -46,10 +46,11 @@ function Header() {
                         {session && <div className='userInitials'>{obtenerIniciales(session.username)}</div>}    
                     </Link></li>
                 </ul>
-                <label htmlFor="theme-switch"></label>
-                <input type="checkbox" id="theme-switch" onChange={() => {handleThemeChange(theme)}} />
-                <p>{theme}</p>
             </nav>
+                <label htmlFor="theme-switch" className='switch'>
+                    <input type="checkbox" id="theme-switch" onChange={() => {handleThemeChange(theme)}} />
+                    <span className='slider round'></span>
+                </label>
         </header>
     )
 }
