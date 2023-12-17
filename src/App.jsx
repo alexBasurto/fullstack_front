@@ -9,26 +9,28 @@ import CreateGroup from './pages/CreateGroup';
 import Transactions from './components/Transactions';
 import Group from './pages/Group';
 import { SessionProvider } from './context/SessionContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import GroupEdit from './components/GroupEdit';
 
 
 function App() {
-
+  const { theme } = useTheme();
+  document.body.className = theme;
   return (
     <SessionProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/create-transaction" element={<Transactions />} />
-          <Route path="/group/:id" element={<Group />} />
-          <Route path="/group/:id/edit" element={<GroupEdit />} />
-          <Route path="/create-group" element={<CreateGroup />} />
-          <Route path="/my-groups" element={<MyGroups />} />
-          <Route path="/user-details" element={<UserDetails />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/create-transaction" element={<Transactions />} />
+            <Route path="/group/:id" element={<Group />} />
+            <Route path="/group/:id/edit" element={<GroupEdit />} />
+            <Route path="/create-group" element={<CreateGroup />} />
+            <Route path="/my-groups" element={<MyGroups />} />
+            <Route path="/user-details" element={<UserDetails />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
     </SessionProvider>
   );
 }
