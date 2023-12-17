@@ -1,5 +1,3 @@
-//Register.jsx
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -15,16 +13,50 @@ function Register() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [error, setError] = useState(null);
 
+  const validateInputs = () => {
+    // Validación de email
+    let errorsAccumulated = '';
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      errorsAccumulated += 'El formato del email no es válido. ';
+    }
+
+    // Validación de contraseña
+    const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8}$/;
+    if (!passwordRegex.test(password)) {
+      errorsAccumulated += 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número. ';
+    }
+
+    // Validación de número de teléfono
+    const phoneRegex = /^\d{9}$/;
+    if (!phoneRegex.test(mobile)) {
+      errorsAccumulated += 'El número de teléfono no es válido, debe tener 9 dígitos. ';
+    }
+
+    // Validación de contraseña y confirmación de contraseña
+    if (password !== passwordVerify) {
+      errorsAccumulated += 'Las contraseñas no coinciden. ';
+    }
+
+    if (errorsAccumulated !== '') {
+      setError(errorsAccumulated);
+      return false;
+    }
+
+    return true;
+  };
+
 const handleSubmit = (e) => {
   e.preventDefault();
   if (email === '' || password === '' || username === '' || mobile === '' || passwordVerify === '') {
     setError('Todos los campos son obligatorios');
     return;
   }
-  if (password !== passwordVerify) {
-    setError('Las contraseñas no coinciden');
+
+  if (!validateInputs()) {
     return;
   }
+
   setError(null);
   registerApi(username, email, mobile, password, passwordVerify).then(response => {
     console.log(response);
