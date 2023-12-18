@@ -1,47 +1,22 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 /*  Código nuestro */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  box-sizing: border-box;
+  font-family: 'Montserrat Alternates', sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+div#root {
+  width: 100%;
+}
 
 body.dark {
   background: rgb(136,136,136);
@@ -55,12 +30,58 @@ body.light {
   color: #333;
 }
 
+body.light header, body.light footer {
+  background-color: #1282A2;
+  
+}
+
+body.dark header, body.dark footer {
+  background-color: #001F54;
+  
+}
+
 header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2em;
+  margin-bottom: 25px;
+  height: 70px;
+}
+
+header h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2em;
+  margin: 0;
+  margin-left: 15%;
+  width: 25%;
+  padding: 0;
+}
+
+header nav {
+  width: 40%;
+}
+
+label.switch {
+  margin-right: 15%;
+}
+
+body.light header h1, body.light header a, body.light footer {
+  color: black;
+}
+
+body.dark header h1, body.dark header a, body.dark footer {
+  color: white;
+}
+
+body.light .userInitials {
+  background-color: orangered;
+  color: white;
+}
+
+body.dark .userInitials {
+  background-color: pink;
+  color: black;
 }
 
 nav ul {
@@ -74,7 +95,6 @@ nav ul {
 }
 
 nav ul li a {
-  color: orangered;
   text-decoration: none;
   font-size: 1.2em;
   padding: 1em;
@@ -82,7 +102,6 @@ nav ul li a {
 }
 
 .userInitials {
-  background-color: orangered;
   color: white;
   border-radius: 50%;
   width: 2em;
@@ -159,3 +178,26 @@ input:checked + .slider:before {
 }
 
 /* dark-light switch ending */
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  height: 70px;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
+}
+
+/*main*/
+
+main {
+  min-height: calc(100dvh - 190px);
+  width: 70%;
+  margin: 0 auto;
+}
