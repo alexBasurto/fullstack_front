@@ -1,8 +1,12 @@
 //GroupBalance.jsx
-
-import React from 'react';
+import { getUserByEmail } from '../utils/apiLagunpay';
+import { useEffect, useState } from 'react';
 
 const GroupBalance = ({ group }) => {
+  const [debtsWithUsers, setDebtsWithUsers] = useState([]);
+ 
+
+
   // Inicializa el balance de cada usuario en 0
   const balances = group.users.reduce((acc, user) => ({ ...acc, [user]: 0 }), {});
 
@@ -44,6 +48,15 @@ payers.forEach(payer => {
   }
 });
 
+useEffect(() => {
+  if (debts) {
+    Promise.all(debts.map(debt => Promise.all([getUserByEmail(debt.to), getUserByEmail(debt.from)])))
+      .then(debtsWithUsers => debtsWithUsers.map(([to, from], index) => ({ ...debts[index], to, from })))
+      .then(setDebtsWithUsers)
+      .catch(console.error);
+  }
+}, [debts]);
+
 // Añade este código después de tu código existente
 return (
   <div>
@@ -55,9 +68,9 @@ return (
       </div>
     ))}
     <h2>Liquidación de cuentas</h2>
-    {debts.map((debt, index) => (
-      <p key={index}>{debt.to} debe a {debt.from} {debt.amount}</p>
-    ))}
+    {debtsWithUsers.map((debt, index) => (
+  <p key={index}>{debt.to.username} debe a {debt.from.username} {debt.amount}</p> // Asume que los usuarios tienen una propiedad de email
+))}
   </div>
 );
 };

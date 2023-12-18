@@ -5,19 +5,29 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { getGroupDetails, deleteGroup } from '../utils/apiLagunpay';
+import { getGroupDetails, deleteGroup, getUserByEmail } from '../utils/apiLagunpay';
 import GroupBalance from '../components/GroupBalance';
-
 
 function Group() {
   const { id } = useParams();
   const [group, setGroup] = useState([]);
   const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    if (group && group.users) {
+      Promise.all(group.users.map(user => getUserByEmail(user)))
+        .then(setUsers)
+        .catch(console.error);
+    }
+  }, [group]);
 
   const handleGetGroup = async () => {
     try {
       const response = await getGroupDetails(id);
       const data = await response.json();
+      const users = data.users;
+      console.log("USUARIO encontrado", await getUserByEmail(users[0]));
       setGroup(data);
     } catch (error) {
       console.error("Error en la peticion de grupos", error.message);
@@ -55,13 +65,13 @@ function Group() {
         <button onClick={handleDeleteGroup}>Eliminar grupo</button>
         <p>{group.description}</p>
         <h3>Usuarios</h3>
-        {group && group.users && (
+        {users && (
         <ul>
-          {group.users.map((user, index) => (
-            <li key={index}>{user}</li>
+          {users.map((user, index) => (
+            <li key={index}>{user.username}</li>
           ))}
         </ul>
-      )}
+        )}
         </>
         )}
         {group && group.transactions && (

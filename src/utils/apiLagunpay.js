@@ -204,6 +204,27 @@ const updateUserDetails = async (data) => {
     }
 }
 
+//funcion frontend para obtener usuario por email
+const getUserByEmail = async (email) => {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/users/email/${email}`, {
+            method: "GET",
+            credentials: "include",
+        });
+        if (response.ok) {
+            const user = await response.json();
+            return user; // Agregar esta línea para devolver el usuario
+        } else {
+            throw new Error("Error al obtener datos de usuario");
+        }
+    } catch (error) {
+        console.error("Error en la petición de usuario", error.message);
+        throw error;
+    }
+};
+
+
+
 export { loginApi, 
     registerApi, 
     logoutApi,
@@ -212,5 +233,6 @@ export { loginApi,
     getUserDetails, 
     getGroupDetails, 
     updateUserDetails,
-    deleteGroup
+    deleteGroup,
+    getUserByEmail
   };
