@@ -30,10 +30,9 @@ function Header() {
 
     return (
         <header>
-            <h1>LagunPay</h1>
+            <Link to="/"><h1>LagunPay</h1></Link>
             <nav>
                 <ul>
-                    <li><Link to="/">Hogar</Link></li>
                     {session ? 
                     <>
                     <li><Link to="/my-groups">My Groups</Link></li>
