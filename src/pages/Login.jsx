@@ -80,7 +80,7 @@ function Login() {
                 <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </label>
 
-                <button type="submit">Iniciar sesión</button>
+                <button type="submit" className="btn btn-outline-info">Iniciar sesión</button>
                 <button type="reset" value="Limpiar">Limpiar</button>
             </form>
             </>
