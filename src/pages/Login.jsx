@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {loginApi, sessionApi} from '../utils/apiLagunpay';
 import { useSession } from '../context/SessionContext';
+import {useTheme} from '../context/ThemeContext';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -12,6 +13,7 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const {theme} = useTheme();
 
     const validateInputs = () => {
         // Validación de email
@@ -56,7 +58,7 @@ function Login() {
     return (
         <>
         <Header />
-        <main>
+        <main className='mt-4'>
             <h2>Login</h2>
             {session && !error && <p className='success'>Usuario logueado correctamente</p>}
             {!session &&
@@ -70,18 +72,26 @@ function Login() {
                 setPassword('');
                 }
             }>
-                <label>
-                Email de usuario:
-                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </label>
+                <div className="mb-3">
+                    <label className='form-label'>
+                    Email de usuario:
+                    <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className='form-control' />
+                    </label>
+                </div>
 
-                <label>
-                Contraseña:
-                <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </label>
+                <div className="mb-3">
+                    <label className='form-label'>
+                    Contraseña:
+                    <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className='form-control' />
+                    </label>
+                </div>
 
-                <button type="submit">Iniciar sesión</button>
-                <button type="reset" value="Limpiar">Limpiar</button>
+                <div className="mb-3">
+                    <button type="submit" className={"btn btn-" + theme}>Iniciar sesión</button>
+                </div>
+                <div className="mb-3">
+                    <button type="reset" value="Limpiar" className={"btn second-button btn-" + theme}>Limpiar</button>
+                </div>
             </form>
             </>
             }

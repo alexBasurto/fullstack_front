@@ -1,11 +1,13 @@
 import {useState, useEffect} from 'react';
 import { getUserDetails, updateUserDetails } from '../utils/apiLagunpay.js';
+import {useTheme} from '../context/ThemeContext';
 
 function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }) {
     const [userDetails, setUserDetails] = useState('');
     const [email, setEmail] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(true);
     const [error, setError] = useState('');
+    const {theme} = useTheme();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,35 +68,76 @@ function UserDetailsEdit({ editMode = true, setEditMode, save = false, setSave }
             {userDetails && (
                 <>
                     {error && <p>{error}</p>}
-                    <button type="button" onClick={() => {
-                        setEditMode(false)
-                    }}>Descartar cambios</button>
                     <form id='editUser'>
-                        <label htmlFor="username">Nombre</label>
-                        <input type="text" id="username" name="username" defaultValue={userDetails.username} />
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" name="email" required defaultValue={userDetails.email} onChange={handleChange}/>
+                    <div className="mb-3">
+                        <label htmlFor="username" className='form-label'>
+                            Nombre
+                            <input type="text" id="username" name="username" className='form-control' defaultValue={userDetails.username} />
+                        </label>
+                    </div>
+
+                    <div className="mb-3">
+                        <label htmlFor="email" className='form-label'>
+                            Email
+                            <input type="email" id="email" name="email" required className='form-control' defaultValue={userDetails.email} onChange={handleChange}/>    
+                        </label>
                         {!isValidEmail && <p>Formato de email incorrecto.</p>}
-                        <label htmlFor="mobile">Número de teléfono</label>
-                        <input type="tel" id="mobile" name="mobile" defaultValue={userDetails.mobile} />
-                        <label htmlFor="password">Nueva contraseña</label>
-                        <input type="password" id="password" name="password" />
-                        <label htmlFor="passwordVerify">Repita la contraseña</label>
-                        <input type="password" id="passwordVerify" name="passwordVerify" />
-                        <label htmlFor="role">Rol</label>
-                        <select id="role" name="role" defaultValue={userDetails.role}>
-                            <option value="user">Usuario</option>
-                            <option value="admin">Administrador</option>
-                        </select>
-                        <label htmlFor="active">Activo</label>
-                        <select id="active" name="active" defaultValue={userDetails.active}>
-                            <option value="true">Sí</option>
-                            <option value="false">No</option>
-                        </select>
-                        <button type="submit" form='editUser' onClick={(event) => {
+                    </div>
+
+                    <div className="mb-3">
+                        <label htmlFor="mobile" className='form-label'>
+                            Número de teléfono
+                            <input type="tel" id="mobile" name="mobile" className='form-control' defaultValue={userDetails.mobile} />
+                        </label>
+                    </div>
+
+                    <div className="mb-3">
+                        <label htmlFor="password" className='form-label'>
+                            Nueva contraseña
+                            <input type="password" id="password" name="password" className='form-control'/>
+                        </label>
+                    </div>
+
+                    <div className="mb-3">
+                        <label htmlFor="passwordVerify" className='form-label'>
+                            Repita la contraseña
+                            <input type="password" id="passwordVerify" name="passwordVerify" className='form-control' />
+                        </label>
+                    </div>
+
+                    <div className="mb-3">
+                        <label htmlFor="role" className='form-label'>
+                            Rol
+                            <select id="role" className='form-select' name="role" defaultValue={userDetails.role}>
+                                <option value="user">Usuario</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </label>
+                        
+                    </div>
+
+                    <div className="mb-3 col">
+                        <label htmlFor="active" className='form-label'>
+                            Activo
+                                <select id="active" className='form-select' name="active" defaultValue={userDetails.active}>
+                                    <option value="true">Sí</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </label>
+                    </div>
+
+                    <div className="mb-3">
+
+                        <button type="submit" className={"btn btn-" + theme} form='editUser' onClick={(event) => {
                             event.preventDefault();
                             handleSubmit(event);
                         }}>Guardar cambios</button>
+                    </div>
+                    <div className="mb-3">
+                        <button type="button" className={"btn second-button btn-" + theme} onClick={() => {
+                            setEditMode(false)
+                        }}>Descartar cambios</button>
+                    </div>
                     </form> 
                 </>
             )}
