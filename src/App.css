@@ -1,3 +1,18 @@
+/*Variables de colores*/
+:root {
+  --color-primario-light: #0F2167;
+  --color-secundario-light: #3559E0;
+  --color-terciario-light: #4CB9E7;
+  --color-back-light: #FFECD6;
+  --color-hightlight-light: #C21292;
+
+  --color-primario-dark: #FFECD6;
+  --color-secundario-dark: #4CB9E7;
+  --color-terciario-dark: #3559E0;
+  --color-back-dark: #0F2167;
+  --color-hightlight-dark: #C21292;
+}
+
 /*  Código nuestro */
 body {
   margin: 0;
@@ -19,25 +34,23 @@ div#root {
 }
 
 body.dark {
-  background: rgb(136,136,136);
-  background: linear-gradient(90deg, rgb(73, 73, 73) 0%, rgba(51,51,51,1) 50%, rgba(73, 73, 73, 1) 100%);
-  color: #fff;
+  background: var(--color-back-light);
+  color: var(--color-primario-light);
 }
 
 body.light {
-  background: rgb(187,187,187);
-  background: linear-gradient(90deg, rgba(187,187,187,1) 0%, rgba(255,255,255,1) 50%, rgba(187,187,187,1) 100%);
-  color: #333;
+  background: var(--color-back-dark);
+  color: var(--color-primario-dark);
 }
 
 body.light header, body.light footer {
-  background-color: #1282A2;
-  
+  background: var(--color-secundario-light);
+  color: var(--color-terciario-light);
 }
 
 body.dark header, body.dark footer {
-  background-color: #001F54;
-  
+  background: var(--color-secundario-dark);
+  color: var(--color-terciario-dark);
 }
 
 header {
@@ -67,21 +80,21 @@ label.switch {
 }
 
 body.light header h1, body.light header a, body.light footer {
-  color: black;
+  color: var(--color-primario-light);
 }
 
 body.dark header h1, body.dark header a, body.dark footer {
-  color: white;
+  color: var(--color-primario-dark);
 }
 
 body.light .userInitials {
-  background-color: orangered;
-  color: white;
+  background-color: var(--color-hightlight-light);
+  color: var(--color-primario-light);
 }
 
 body.dark .userInitials {
-  background-color: pink;
-  color: black;
+  background-color: var(--color-hightlight-dark);
+  color: var(--color-primario-dark);
 }
 
 nav ul {
@@ -102,7 +115,6 @@ nav ul li a {
 }
 
 .userInitials {
-  color: white;
   border-radius: 50%;
   width: 2em;
   height: 2em;
@@ -154,8 +166,24 @@ nav ul li a {
   transition: .4s;
 }
 
+body.light .slider {
+  background-color: var(--color-primario-light);
+}
+
+body.dark .slider {
+  background-color: var(--color-primario-dark);
+}
+
+body.light .slider:before {
+  background-color: var(--color-primario-dark);
+}
+
+body.dark .slider:before {
+  background-color: var(--color-primario-light);
+}
+
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: var(--color-back-light)
 }
 
 /* input:focus + .slider {
