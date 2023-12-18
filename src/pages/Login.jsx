@@ -86,8 +86,12 @@ function Login() {
                     </label>
                 </div>
 
-                <button type="submit" className={"btn btn-" + theme}>Iniciar sesión</button>
-                <button type="reset" value="Limpiar" className={"btn btn-" + theme}>Limpiar</button>
+                <div className="mb-3">
+                    <button type="submit" className={"btn btn-" + theme}>Iniciar sesión</button>
+                </div>
+                <div className="mb-3">
+                    <button type="reset" value="Limpiar" className={"btn second-button btn-" + theme}>Limpiar</button>
+                </div>
             </form>
             </>
             }
