@@ -223,7 +223,27 @@ const getUserByEmail = async (email) => {
     }
 };
 
-
+//transactions
+const createTransaction = async (id,data) => {
+    try {
+        const response = await fetch(`${VITE_BACKEND_HOST}/groups/${id}/transaction/new`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        if (response.ok) {
+            return response;
+        } else {
+            throw new Error("Error al crear transacción");
+        }
+    } catch (error) {
+        console.error("Error al crear transacción", error.message);
+        throw error;
+    }
+}
 
 export { loginApi, 
     registerApi, 
@@ -234,5 +254,6 @@ export { loginApi,
     getGroupDetails, 
     updateUserDetails,
     deleteGroup,
-    getUserByEmail
+    getUserByEmail,
+    createTransaction
   };

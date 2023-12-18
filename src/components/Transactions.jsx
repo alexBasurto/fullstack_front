@@ -3,11 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { createTransaction } from '../utils/apiLagunpay';
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 function Transactions() {
   const [beneficiariesOption, setBeneficiariesOption] = useState('all');
   const [numBeneficiaries, setNumBeneficiaries] = useState(0);
   const [customBeneficiaries, setCustomBeneficiaries] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (beneficiariesOption === 'custom') {
@@ -21,12 +26,30 @@ function Transactions() {
     setCustomBeneficiaries(newBeneficiaries);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    data.amount = parseFloat(data.amount);
+    // ...
+    try {
+      const response = await createTransaction(id, data);
+      const responseData = await response.json();
+      console.log('Transacción creada', responseData);
+      navigate(`/group/${id}`);
+
+    } catch (error) {
+      console.error('Error al crear transacción', error.message);
+    }
+  }
+
   return (
     <>
       <Header />
       <main>
           <h2>Ingresar nueva transacción</h2>
-        <form action="post">
+        <form onSubmit={handleSubmit}>
           <label>
             Gasto:
             <input type="number" name="amount" />
