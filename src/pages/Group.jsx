@@ -62,6 +62,7 @@ function Group() {
         <br/>
         <Link to={`/group/${id}/edit`} >Editar grupo</Link>
         <br/>
+        <Link to={`/group/${id}/create-transaction`}>Añadir transacción</Link>
         <button onClick={handleDeleteGroup}>Eliminar grupo</button>
         <p>{group.description}</p>
         <h3>Usuarios</h3>

@@ -20,7 +20,7 @@ function App() {
     <SessionProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/create-transaction" element={<Transactions />} />
+            <Route path="/group/:id/create-transaction" element={<Transactions />} />
             <Route path="/group/:id" element={<Group />} />
             <Route path="/group/:id/edit" element={<GroupEdit />} />
             <Route path="/create-group" element={<CreateGroup />} />
