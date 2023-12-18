@@ -1,16 +1,16 @@
 /*Variables de colores*/
 :root {
-  --color-primario-light: #0F2167;
-  --color-secundario-light: #3559E0;
-  --color-terciario-light: #4CB9E7;
-  --color-back-light: #FFECD6;
-  --color-hightlight-light: #C21292;
-
-  --color-primario-dark: #FFECD6;
-  --color-secundario-dark: #4CB9E7;
-  --color-terciario-dark: #3559E0;
-  --color-back-dark: #0F2167;
+  --color-primario-dark: #0F2167;
+  --color-secundario-dark: #3559E0;
+  --color-terciario-dark: #4CB9E7;
+  --color-back-dark: #FFECD6;
   --color-hightlight-dark: #C21292;
+
+  --color-primario-light: #FFECD6;
+  --color-secundario-light: #4CB9E7;
+  --color-terciario-light: #3559E0;
+  --color-back-light: #0F2167;
+  --color-hightlight-light: #C21292;
 }
 
 /*  Código nuestro */
@@ -23,7 +23,6 @@ body {
   font-family: 'Montserrat Alternates', sans-serif;
   width: 100%;
   min-height: 100vh;
-  font-family: 'Roboto', sans-serif;
   font-size: 1.2em;
   font-weight: 400;
   line-height: 1.5;
@@ -62,13 +61,17 @@ header {
   height: 70px;
 }
 
-header h1 {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 2em;
+header>a:first-child {
+  text-decoration: none;
   margin: 0;
   margin-left: 15%;
   width: 25%;
   padding: 0;
+}
+
+header h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2em;
 }
 
 header nav {
@@ -110,19 +113,18 @@ nav ul {
 nav ul li a {
   text-decoration: none;
   font-size: 1.2em;
-  padding: 1em;
   cursor: pointer;
 }
 
 .userInitials {
+  font-family: 'Roboto', sans-serif;
   border-radius: 50%;
   width: 2em;
   height: 2em;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1em;
 }
 
 /* dark-light switch starting */
