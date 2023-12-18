@@ -236,3 +236,50 @@ main a {
   text-decoration: none;
   color: var(--color-hightlight-dark);
 }
+
+/*form login*/
+
+.btn[type="reset"] {
+  margin-left: 10px;
+}
+
+@media (max-width: 426px) {
+  header {
+    justify-content: space-around;
+  }
+
+  header>a:first-child {
+    margin-left: 0;
+    width: auto;
+    font-size: 14px;
+    margin-left: 3%;
+  }
+
+  header nav {
+    width: auto;
+  }
+
+  label.switch {
+    margin-right: 3%;
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 0 5px;
+  }
+
+  nav ul li a {
+    font-size: 1em;
+  }
+
+  .userInitials {
+    width: 2em;
+    height: 2em;
+    font-size: 1em;
+  }
+}
