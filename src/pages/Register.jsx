@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { registerApi } from '../utils/apiLagunpay';
-import { useTheme } from '../context/ThemeContext';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -13,7 +12,6 @@ function Register() {
   const [passwordVerify, setPasswordVerify] = useState('');
   const [isRegistered, setIsRegistered] = useState(false);
   const [error, setError] = useState(null);
-  const { theme } = useTheme();
 
   const validateInputs = () => {
     // Validación de email
@@ -75,16 +73,12 @@ const handleSubmit = (e) => {
   return (
     <>
     <Header />
-    <main className='mt-4'>
+    <main>
       <h2>Registro</h2>
       {!isRegistered && <>
       <p>Introduce tus datos para registrarte</p>
       <Link to="/login">¿Ya tienes cuenta? Inicia sesión.</Link>
-      {error && 
-      <div>
-        <span className="badge rounded-pill text-bg-warning">Atención</span>
-        <p className='error'>{error}</p>
-      </div>}
+      {error && <p className='error'>{error}</p>}
       <form action="post" onSubmit={handleSubmit} onReset={() => {
         setUsername('');
         setEmail('');
@@ -92,48 +86,28 @@ const handleSubmit = (e) => {
         setPassword('');
         setPasswordVerify('');
         }}>
-          <div className="mb-3">
-            <label className='form-label' htmlFor='username'>
-              Nombre de usuario:
-              <input id='username' className='form-control' type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-            </label>
-          </div>
-
-          <div className="mb-3">
-            <label className='form-label' htmlFor='email'>
-              Email:
-              <input id='email' className='form-control' type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </label>
-          </div>
-
-          <div className="mb-3">
-            <label className='form-label' htmlFor='mobile'>
-              Móvil:
-              <input id='mobile' className='form-control' type="tel" name="mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} />
-            </label>
-          </div>
-
-          <div className="mb-3">
-            <label className='form-label' htmlFor='password'>
-              Contraseña:
-              <input id='password' className='form-control' type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </label>
-          </div>
-
-          <div className="mb-3">
-            <label className='form-label' htmlFor='passwordVerify'>
-              Confirmar contraseña:
-              <input id='passwordVerify' className='form-control' type="password" name="passwordVerify" value={passwordVerify} onChange={(e) => setPasswordVerify(e.target.value)} />
-            </label>
-          </div>
-
-          <div className="mb-3">
-            <button type="submit" className={"btn btn-" + theme}>Registrarse</button>
-          </div>
-
-          <div className="mb-3">
-            <button type="reset" value="Limpiar" className={"btn btn-" + theme}>Limpiar</button>
-          </div>
+        <label>
+          Nombre de usuario:
+          <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <label>
+          Email:
+          <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
+        <label>
+          Móvil:
+          <input type="tel" name="mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} />
+        </label>
+        <label>
+          Contraseña:
+          <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <label>
+          Confirmar contraseña:
+          <input type="password" name="passwordVerify" value={passwordVerify} onChange={(e) => setPasswordVerify(e.target.value)} />
+        </label>
+        <button type="submit">Registrarse</button>
+        <button type="reset" value="Limpiar">Limpiar</button>
       </form>
       </>
       }
