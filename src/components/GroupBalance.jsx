@@ -78,9 +78,16 @@ return (
     <ul>
       {group.transactions.map((transaction, index) => (
         <li key={index}>
-          <p>Fecha: {transaction.date.substring(0, 10)}</p>
           <p>Descripción: {transaction.description}</p>
+          <p>Fecha: {transaction.date.substring(0, 10)}</p>
           <p>Importe: {transaction.amount/100} €</p>
+          <p>Pagador: {transaction.user}</p>
+          <p>Beneficiarios:</p>
+          <ul>
+            {transaction.beneficiaryAndRepartition.map((beneficiary, index) => (
+              <li key={index}>{beneficiary.email} - {(beneficiary.amount/100).toFixed(2)} €</li>
+            ))}
+          </ul>
         </li>
       ))}
     </ul>
