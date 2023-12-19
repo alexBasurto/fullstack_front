@@ -12,7 +12,6 @@ const SessionProvider = ({ children }) => {
                 const response = await sessionApi();
                 const data = await response.json();
                 setSession(data);
-                console.log('Usuario encontrado', data);
             } catch (error) {
                 console.error('Error en la peticion de usuario', error.message);
             }

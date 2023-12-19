@@ -27,7 +27,6 @@ function Group() {
       const response = await getGroupDetails(id);
       const data = await response.json();
       const users = data.users;
-      console.log("USUARIO encontrado", await getUserByEmail(users[0]));
       setGroup(data);
     } catch (error) {
       console.error("Error en la peticion de grupos", error.message);
