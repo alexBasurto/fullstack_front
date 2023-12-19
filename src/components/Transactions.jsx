@@ -5,7 +5,6 @@ import Header from './Header';
 import Footer from './Footer';
 import { createTransaction } from '../utils/apiLagunpay';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getUserByEmail } from '../utils/apiLagunpay';
 const VITE_BACKEND_HOST =
     import.meta.env.VITE_BACKEND_HOST || "http://localhost:3006";
 
@@ -50,16 +49,16 @@ function Transactions() {
   const fetchGroupUsers = async (id) => {
     const response = await fetch(`${VITE_BACKEND_HOST}/groups/${id}`);
     const data = await response.json();
-    const usersData = await Promise.all(data.users.map(user => getUserByEmail(user)));
-    const users = await Promise.all(usersData.map(user => user.username));
-    return users; 
+    console.log("DATA", data.users)
+    return data.users;
   };
 
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetchGroupUsers(id).then(setUsers);
-  }, [id]);
+  }
+  , []);
 
 
 
@@ -84,15 +83,15 @@ function Transactions() {
             <input type="date" name="date" />
           </label>
           <label>
-            Pagador:
-            <select name="user">
-              {users.map((user, index) => (
-                <option key={index} value={user}>
-                  {user}
-                </option>
-              ))}
-            </select>
-          </label>
+          Pagador:
+          <select name="user">
+            {users.map((user, index) => (
+              <option key={index} value={user}>
+                {user}
+              </option>
+            ))}
+          </select>
+        </label>
           <label>
             Beneficiarios:
             <select name="users" value={beneficiariesOption} onChange={e => setBeneficiariesOption(e.target.value)}>
