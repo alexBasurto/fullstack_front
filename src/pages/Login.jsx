@@ -66,7 +66,11 @@ function Login() {
             <p>Introduce tus datos para iniciar sesión</p>
             <Link to="/register">¿No tienes cuenta? Regístrate.</Link>
 
-            {error && <p className='error'>{error}</p>}
+            {error &&
+            <div>
+                <span className="badge rounded-pill text-bg-danger">Error</span>
+                <p className='error'>{error}</p>
+            </div>}
             <form action="post" onSubmit={handleSumbit} onReset={() => {
                 setEmail('');
                 setPassword('');
