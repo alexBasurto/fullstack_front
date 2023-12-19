@@ -59,19 +59,26 @@ useEffect(() => {
 
 // Añade este código después de tu código existente
 return (
+  <>
   <div>
-    <h2>Balance del grupo {group.name}</h2>
-    {group.users.map(user => (
-      <div key={user}>
-        <h3>{user}</h3>
-        <p>{balances[user] > 0 ? `Debe pagar ${balances[user]}` : `Debe cobrar ${-balances[user]}`}</p>
-      </div>
-    ))}
     <h2>Liquidación de cuentas</h2>
     {debtsWithUsers.map((debt, index) => (
-  <p key={index}>{debt.to.username} debe a {debt.from.username} {debt.amount}</p> // Asume que los usuarios tienen una propiedad de email
+  <p key={index}>{debt.to.username} debe a {debt.from.username} {debt.amount/100} €</p> // Asume que los usuarios tienen una propiedad de email
 ))}
   </div>
+  <h2>Transacciones del grupo</h2>
+  <ul>
+    {group.transactions.map((transaction, index) => (
+      <li key={index}>
+        <p>Fecha: {transaction.date.substring(0, 10)}</p>
+        <p>Descripción: {transaction.description}</p>
+        <p>Importe: {transaction.amount/100} €</p>
+        <p>Pagador: {transaction.user}</p>
+        <p>Beneficiarios: {transaction.beneficiaryAndRepartition.map(b => b.email + "(" + b.amount + ")").join(', ')}</p>
+      </li>
+    ))}
+  </ul>
+  </>
 );
 };
 
