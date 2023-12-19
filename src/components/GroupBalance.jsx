@@ -1,6 +1,6 @@
 //GroupBalance.jsx
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getUserByEmail } from '../utils/apiLagunpay';
 
 
@@ -8,6 +8,8 @@ const GroupBalance = ({ group }) => {
   const [debtsWithUsers, setDebtsWithUsers] = useState([]);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const navigate = useNavigate();
+  const [updatedSettlements, setUpdatedSettlements] = useState([]);
+
 
   // Asegúrate de que las transacciones existen
   const transactions = group.transactions || [];
@@ -53,24 +55,44 @@ const GroupBalance = ({ group }) => {
 
 
 // Antes de tu bloque de retorno, haz las solicitudes a la API para obtener los nombres de usuario
-/* const fetchUsernames = async () => {
-  for (let settlement of settlements) {
+const fetchUsernames = async () => {
+  const updatedSettlements = await Promise.all(settlements.map(async (settlement) => {
     const fromUser = await getUserByEmail(settlement.from);
     const toUser = await getUserByEmail(settlement.to);
-    settlement.from = fromUser.username;
-    settlement.to = toUser.username;
-    console.log("settlement", settlement);
-  }
+    return {
+      ...settlement,
+      from: fromUser.username,
+      to: toUser.username
+    };
+  }));
+
+  console.log("updatedSettlements", updatedSettlements);
 };
 
-fetchUsernames(); */
+useEffect(() => {
+  const fetchUsernames = async () => {
+    const newSettlements = await Promise.all(settlements.map(async (settlement) => {
+      const fromUser = await getUserByEmail(settlement.from);
+      const toUser = await getUserByEmail(settlement.to);
+      return {
+        ...settlement,
+        from: fromUser.username,
+        to: toUser.username
+      };
+    }));
 
-// Ahora, en tu bloque de retorno, `settlement.from` y `settlement.to` serán los nombres de usuario
+    setUpdatedSettlements(newSettlements);
+  };
+
+  fetchUsernames();
+}, [settlements]);
+
+
 return (
   <>
     <div>
-      <h2>Liquidación de cuentas</h2>
-      {settlements.map((settlement, index) => (
+    <h2>Liquidación de cuentas</h2>
+      {updatedSettlements.map((settlement, index) => (
         <p key={index}>{settlement.from} debe a {settlement.to} {(settlement.amount/100).toFixed(2)} €</p>
       ))}
     </div>
