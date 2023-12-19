@@ -1,10 +1,15 @@
 //GroupBalance.jsx
 import { getUserByEmail } from '../utils/apiLagunpay';
 import { useEffect, useState } from 'react';
+import UpdateTransaction from './UpdateTransaction';
+import { useNavigate } from 'react-router-dom';
+
 
 const GroupBalance = ({ group }) => {
   const [debtsWithUsers, setDebtsWithUsers] = useState([]);
- 
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const navigate = useNavigate();
+
 
 
   // Inicializa el balance de cada usuario en 0
@@ -57,13 +62,13 @@ useEffect(() => {
   }
 }, [debts]);
 
-// Añade este código después de tu código existente
+
 return (
   <>
   <div>
     <h2>Liquidación de cuentas</h2>
     {debtsWithUsers.map((debt, index) => (
-  <p key={index}>{debt.to.username} debe a {debt.from.username} {debt.amount/100} €</p> // Asume que los usuarios tienen una propiedad de email
+  <p key={index}>{debt.to.username} debe a {debt.from.username} {debt.amount/100} €</p>
 ))}
   </div>
   <h2>Transacciones del grupo</h2>
@@ -74,7 +79,9 @@ return (
         <p>Descripción: {transaction.description}</p>
         <p>Importe: {transaction.amount/100} €</p>
         <p>Pagador: {transaction.user}</p>
+        <p>ID:{transaction._id}</p>
         <p>Beneficiarios: {transaction.beneficiaryAndRepartition.map(b => b.email + "(" + b.amount + ")").join(', ')}</p>
+        <button onClick={() => navigate(`/group/${group._id}/edit/transaction/${transaction._id}`)}>Editar transacción</button>
       </li>
     ))}
   </ul>

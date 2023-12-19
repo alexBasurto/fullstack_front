@@ -11,6 +11,7 @@ import Group from './pages/Group';
 import { SessionProvider } from './context/SessionContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import GroupEdit from './components/GroupEdit';
+import UpdateTransaction from './components/UpdateTransaction';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/group/:id/create-transaction" element={<Transactions />} />
             <Route path="/group/:id" element={<Group />} />
             <Route path="/group/:id/edit" element={<GroupEdit />} />
+            <Route path="/group/:id/edit/transaction/:transactionId" element={<UpdateTransaction />} />
             <Route path="/create-group" element={<CreateGroup />} />
             <Route path="/my-groups" element={<MyGroups />} />
             <Route path="/user-details" element={<UserDetails />} />

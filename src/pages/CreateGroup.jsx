@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSession } from '../context/SessionContext';
-
+import { useNavigate, Link } from 'react-router-dom';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -17,7 +17,7 @@ function CreateGroup() {
     createdAt: new Date(),
     updatedAt: new Date(),
     active: true,
-    owner: session ? session : '',
+    owner: session ? session.email : '',
     transactions: [],
   });
 
