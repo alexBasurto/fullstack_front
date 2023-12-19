@@ -53,17 +53,17 @@ const GroupBalance = ({ group }) => {
 
 
 // Antes de tu bloque de retorno, haz las solicitudes a la API para obtener los nombres de usuario
-const fetchUsernames = async () => {
+/* const fetchUsernames = async () => {
   for (let settlement of settlements) {
     const fromUser = await getUserByEmail(settlement.from);
     const toUser = await getUserByEmail(settlement.to);
     settlement.from = fromUser.username;
     settlement.to = toUser.username;
-    console.log(settlement);
+    console.log("settlement", settlement);
   }
 };
 
-fetchUsernames();
+fetchUsernames(); */
 
 // Ahora, en tu bloque de retorno, `settlement.from` y `settlement.to` serán los nombres de usuario
 return (
